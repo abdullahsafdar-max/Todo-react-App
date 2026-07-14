@@ -4,7 +4,7 @@ function TodoItem({ task, deleteTask, toggleComplete }) {
       <input
         type="checkbox"
         checked={task.completed}
-        onChange={() => toggleComplete(task.id)}
+        onChange={() => toggleComplete(task._id)}
       />
       <span
         style={{
@@ -14,7 +14,7 @@ function TodoItem({ task, deleteTask, toggleComplete }) {
       >
         {task.text}
       </span>
-      <button onClick={() => deleteTask(task.id)}>Delete</button>
+      <button onClick={() => deleteTask(task._id)}>Delete</button>
     </li>
   );
 }
