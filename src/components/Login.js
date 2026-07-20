@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { login } from "../services/authService";
+import { login, googleLogin } from "../services/authService";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Login({ onLogin, showSignup }) {
   const [email, setEmail] = useState("");
@@ -35,6 +36,22 @@ function Login({ onLogin, showSignup }) {
         />
 
         <button onClick={handleLogin}>Login</button>
+
+<p className="or-text">OR</p>
+
+<GoogleLogin
+  onSuccess={async (credentialResponse) => {
+    try {
+      await googleLogin(credentialResponse.credential);
+      onLogin();
+    } catch (error) {
+      alert(error.response?.data?.message || "Google Login Failed");
+    }
+  }}
+  onError={() => {
+    alert("Google Login Failed");
+  }}
+/>
 
         <p>
           Don't have an account?{" "}
