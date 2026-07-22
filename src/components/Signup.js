@@ -3,22 +3,40 @@ import { signup } from "../services/authService";
 
 function Signup({ showLogin }) {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState("");
 
   const handleSignup = async () => {
-    try {
-      await signup({
-        name,
-        email,
-        password,
-      });
+    setError("");
+    if (password.length < 6) {
+  setError("Password must be at least 6 characters long.");
+  return;
+}
 
-      alert("Signup Successful! Please Login.");
-      showLogin();
-    } catch (error) {
-      alert(error.response?.data?.message || "Signup Failed");
-    }
+if (password !== confirmPassword) {
+  setError("Passwords do not match.");
+  return;
+}
+    try {
+  setLoading(true);
+
+  await signup({
+    name,
+    email,
+    password,
+  });
+
+  showLogin();
+
+} catch (error) {
+  setError(error.response?.data?.message || "Signup Failed");
+} finally {
+  setLoading(false);
+}
   };
 
   return (
@@ -28,27 +46,48 @@ function Signup({ showLogin }) {
         <h2>Create Account</h2>
 
         <input
+        id="name"
           type="text"
           placeholder="Enter Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSignup()}
         />
 
         <input
+        id="email"
           type="email"
           placeholder="Enter Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSignup()}
         />
 
         <input
+        id="password"
           type="password"
           placeholder="Enter Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSignup()}
         />
 
-        <button onClick={handleSignup}>Signup</button>
+        <input
+  id="confirmPassword"
+  type="password"
+  placeholder="Confirm Password"
+  value={confirmPassword}
+  onChange={(e) => setConfirmPassword(e.target.value)}
+  onKeyDown={(e) => e.key === "Enter" && handleSignup()}
+/>
+{error && <p className="error-message">{error}</p>}
+
+        <button
+  onClick={handleSignup}
+  disabled={loading}
+>
+  {loading ? "Signing up..." : "Signup"}
+</button>
 
         <p>
           Already have an account?{" "}
