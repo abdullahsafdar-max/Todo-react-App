@@ -84,13 +84,33 @@ p {
 #tasks-list li{
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    gap:12px;
 
     background:#d3d6de;
     padding:14px 18px;
     border-radius:10px;
     margin-bottom:12px;
 }
+
+.task-text{
+    flex:1;
+    text-align:left;
+    word-break:break-word;
+}
+
+.task-actions{
+    display:flex;
+    gap:8px;
+    flex-shrink:0;
+}
+
+.edit-input{
+    flex:1;
+    padding:8px 12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+}
+
 
 #tasks-list button{
     background:#ef4444;
@@ -173,6 +193,24 @@ p {
   cursor: pointer;
 }
 
+.or-text {
+  text-align: center;
+  margin: 20px 0;
+  color: #666;
+  font-weight: 500;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.completed-task {
+  text-decoration: line-through;
+  color: #8c929c;
+}
 
 @media (max-width: 480px) {
   .container {

@@ -74,6 +74,18 @@ function App() {
 
     loadTasks();
   };
+  // Edit Task
+const editTask = async (id, newText) => {
+  try {
+    await updateTask(id, {
+      text: newText,
+    });
+
+    loadTasks();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   // If not logged in
   if (!isLoggedIn) {
@@ -111,10 +123,11 @@ function App() {
           {tasks.length === 0 && <p>No tasks yet. Add one above!</p>}
 
           <TodoList
-            tasks={tasks}
-            deleteTask={deleteTask}
-            toggleComplete={toggleComplete}
-          />
+  tasks={tasks}
+  deleteTask={deleteTask}
+  toggleComplete={toggleComplete}
+  editTask={editTask}
+/>
         </div>
       </div>
     </>

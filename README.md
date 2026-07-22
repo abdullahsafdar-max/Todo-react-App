@@ -1,6 +1,7 @@
-# MERN Todo App with JWT Authentication
+# MERN Todo App with JWT & Google Authentication
 
-A full-stack Todo Application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js). The application allows users to create an account, securely log in using JSON Web Tokens (JWT), and manage their own personal tasks. Each user can only access, create, update, and delete their own tasks.
+A full-stack Todo Application built using the MERN Stack (MongoDB, Express.js, React.js, and Node.js).
+The application allows users to register an account, log in using either Email & Password or Google Sign-In, and securely manage their own personal tasks using JSON Web Tokens (JWT). Every user can only access, create, update, and delete their own tasks.
 
 ---
 
@@ -38,7 +39,8 @@ A full-stack Todo Application built using the MERN Stack (MongoDB, Express.js, R
 ## Features
 
 - User Signup
-- User Login
+- User Login (Email & Password)
+- Google Sign-In
 - JWT Authentication
 - Protected Routes
 - User-specific Tasks
@@ -62,6 +64,7 @@ A full-stack Todo Application built using the MERN Stack (MongoDB, Express.js, R
 - JavaScript (ES6)
 - Axios
 - CSS3
+- @react-oauth/google
 
 ### Backend
 
@@ -69,6 +72,8 @@ A full-stack Todo Application built using the MERN Stack (MongoDB, Express.js, R
 - Express.js
 - JSON Web Token (JWT)
 - bcryptjs
+- Google OAuth
+- google-auth-library
 
 ### Database
 
@@ -142,15 +147,28 @@ todo-react-app/
 
 ## Authentication Flow
 
-1. A new user registers using the Signup page.
-2. The password is securely hashed using bcryptjs before being stored in MongoDB.
-3. The user logs in using their email and password.
-4. The server verifies the credentials.
-5. A JWT token is generated.
-6. The token is stored in the browser's Local Storage.
-7. Every protected request sends the token in the Authorization header.
-8. The backend verifies the token before processing the request.
-9. Each user can only access their own tasks.
+### Email & Password
+
+1. User creates an account.
+2. Password is hashed using bcryptjs.
+3. User logs in.
+4. Server verifies credentials.
+5. JWT token is generated.
+6. JWT is stored in Local Storage.
+7. Protected requests include the JWT.
+8. Backend verifies the JWT.
+9. User accesses only their own tasks.
+
+### Google Sign-In
+
+1. User clicks **Continue with Google**.
+2. Google authenticates the user.
+3. Google sends an ID Token.
+4. Backend verifies the Google ID Token.
+5. If the user does not exist, a new account is created automatically.
+6. Backend generates its own JWT.
+7. JWT is stored in Local Storage.
+8. User accesses only their own tasks.
 
 ---
 
@@ -162,6 +180,7 @@ todo-react-app/
 | ------ | ------------------ | ---------------------- |
 | POST   | `/api/auth/signup` | Register a new user    |
 | POST   | `/api/auth/login`  | Login an existing user |
+| POST   | `/api/auth/google`  | Login with google |
 
 ### Task APIs
 
@@ -273,6 +292,12 @@ MongoDB
 - Filter Tasks
 - Dark Mode
 - Deploy Backend and Frontend
+- Edit User Profile
+- Change Password
+- Remember Me
+- Task Sharing
+- Notifications
+- Mobile Responsive Improvements
 
 ---
 
