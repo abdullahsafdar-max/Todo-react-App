@@ -193,6 +193,13 @@ p {
   cursor: pointer;
 }
 
+.or-text {
+  text-align: center;
+  margin: 20px 0;
+  color: #666;
+  font-weight: 500;
+}
+
 .error-message {
   color: red;
   font-size: 14px;

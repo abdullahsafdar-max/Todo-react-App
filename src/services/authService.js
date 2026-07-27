@@ -20,7 +20,6 @@ export const login = async (userData) => {
   return response.data;
 };
 
-
 // Google Login
 export const googleLogin = async (credential) => {
   const response = await axios.post(`${API_URL}/google`, {
@@ -34,8 +33,6 @@ export const googleLogin = async (credential) => {
 
   return response.data;
 };
-
-
 
 // Logout
 export const logout = () => {
