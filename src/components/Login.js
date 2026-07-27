@@ -81,21 +81,7 @@ function Login({ onLogin, showSignup }) {
 />
 
 
-<p className="or-text">OR</p>
 
-<GoogleLogin
-  onSuccess={async (credentialResponse) => {
-    try {
-      await googleLogin(credentialResponse.credential);
-      onLogin();
-    } catch (error) {
-      alert(error.response?.data?.message || "Google Login Failed");
-    }
-  }}
-  onError={() => {
-    alert("Google Login Failed");
-  }}
-/>
 
         <p>
           Don't have an account?{" "}
